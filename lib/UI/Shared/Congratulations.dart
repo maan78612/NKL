@@ -3,9 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nlk/Provider/appProvider.dart';
 import 'package:nlk/constants/app_constants.dart';
-import 'package:provider/provider.dart';
 
 class SuccessfullySignUpBottom extends StatefulWidget {
   @override
@@ -17,9 +15,7 @@ class _SuccessfullySignUpBottomState extends State<SuccessfullySignUpBottom> {
   @override
   void initState() {
     Timer(Duration(seconds: 3), () {
-      Provider.of<AppProvider>(Get.context, listen: false).clearSignUpData();
-
-      // Get.offAll(() => SignInView());
+      // Provider.of<AppProvider>(Get.context, listen: false).clearSignUpData();
     });
     super.initState();
   }
