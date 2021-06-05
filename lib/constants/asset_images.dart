@@ -7,4 +7,13 @@ class AssetImages {
   String btmCancel = "assets/images/btm_cancel.png";
   String eyeOpen = "assets/images/eye_open.png";
   String eyeClose = "assets/images/eye_close.png";
+  String searchIcon = "assets/images/searchIcon.png";
+  String realEstate = "assets/images/realEstate.png";
+  String locationIcon = "assets/images/locationIcon.png";
+  String jobs = "assets/images/jobs.png";
+  String fashion = "assets/images/fashion.png";
+  String events = "assets/images/events.png";
+  String electronics = "assets/images/electronics.png";
+  String business = "assets/images/business.png";
+  String bellIcon = "assets/images/bellicon.png";
 }

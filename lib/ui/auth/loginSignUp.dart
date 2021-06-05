@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nlk/Provider/appProvider.dart';
 import 'package:nlk/UI/Shared/Congratulations.dart';
 import 'package:nlk/constants/app_constants.dart';
+import 'package:nlk/ui/dashBoard/mainDashBoard.dart';
 import 'package:nlk/utilities/validator.dart';
 import 'package:provider/provider.dart';
 
@@ -375,6 +376,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                                               .validate()) {
                                             return;
                                           }
+                                          Get.to(DashBoard());
                                         },
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
