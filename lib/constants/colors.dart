@@ -11,4 +11,5 @@ class AppColors {
   Color hintColor = Color(0xffA6AFBF);
   Color fieldTitleColor = Color(0xff748A9D);
   Color blackGrey = Color(0xff4D4D4D);
+  Color lightBlue = Color(0xffEBF6FF);
 }

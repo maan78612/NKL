@@ -68,8 +68,21 @@ class AppProvider extends ChangeNotifier {
 /////////////////////////////////////////// DashBoard///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
+  int selectedIndex = 0;
+  PageController pageController;
+
+  dashBoardNavigation(int index) {
+    selectedIndex = index;
+    pageController.animateToPage(index,
+        duration: Duration(milliseconds: 300), curve: Curves.ease);
+
+    notifyListeners();
+  }
+
   onInitDash() {
+    pageController = PageController();
     categoryData();
+    notifyListeners();
   }
 
   List<Category> categoryList = [];
