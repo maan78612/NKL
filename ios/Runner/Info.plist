@@ -41,5 +41,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+    <string>Allowing gallery access will enable us to capture photos from camera to set image as profile photo or add in profile gallery </string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Allowing gallery access will enable us to pick photos to set as profile photo or to add in gallery images</string>
 </dict>
 </plist>

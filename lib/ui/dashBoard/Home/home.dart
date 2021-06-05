@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nlk/constants/app_constants.dart';
 import 'package:nlk/modal/categories.dart';
 import 'package:nlk/provider/appProvider.dart';
+import 'package:nlk/ui/widgets/category.dart';
 import 'package:nlk/utilities/validator.dart';
 import 'package:provider/provider.dart';
 
@@ -83,7 +84,9 @@ class _HomeState extends State<Home> {
                         delegate: SliverChildBuilderDelegate(
                           (BuildContext context, int index) {
                             Category cat = appProvider.categoryList[index];
-                            return category(title: cat.title, icon: cat.icon);
+                            return CategoryWidget(
+                              category: cat,
+                            );
                           },
                           childCount: 6,
                         ),
@@ -260,31 +263,6 @@ class _HomeState extends State<Home> {
           ),
         ),
       ],
-    );
-  }
-
-  Widget category({String icon, String title}) {
-    return Container(
-      margin: EdgeInsets.symmetric(
-          vertical: Get.height * 0.01, horizontal: Get.width * 0.01),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image.asset(
-            icon,
-            scale: 4,
-          ),
-          SizedBox(height: 10),
-          Text(
-            '$title',
-            style: GoogleFonts.roboto(
-              fontSize: 11.0,
-              color: const Color(0xFF1D2226).withOpacity(0.8),
-            ),
-          ),
-        ],
-      ),
     );
   }
 
