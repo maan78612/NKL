@@ -16,4 +16,7 @@ class AssetImages {
   String electronics = "assets/images/electronics.png";
   String business = "assets/images/business.png";
   String bellIcon = "assets/images/bellicon.png";
+  String image1 = "assets/images/image1.png";
+  String favoriteIcon = "assets/images/favorite_icon.png";
+  String favoriteFillIcon = "assets/images/favorite_fill_icon.png";
 }

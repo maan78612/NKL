@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nlk/Provider/appProvider.dart';
 import 'package:nlk/UI/Shared/Congratulations.dart';
 import 'package:nlk/constants/app_constants.dart';
+import 'package:nlk/provider/appProvider.dart';
 import 'package:nlk/ui/dashBoard/mainDashBoard.dart';
 import 'package:nlk/utilities/validator.dart';
 import 'package:provider/provider.dart';
@@ -385,7 +385,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                                         height: Get.height * .065,
                                         child: Center(
                                           child: Text(
-                                            'login_caps',
+                                            'LOG IN',
                                             style: GoogleFonts.poppins(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w600,

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:nlk/provider/authProvider.dart';
 import 'package:provider/provider.dart';
 
-import 'Provider/appProvider.dart';
 import 'UI/splash_screen.dart';
+import 'provider/appProvider.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,7 +22,10 @@ class MyApp extends StatelessWidget {
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark));
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => AppProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => AppProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider())
+      ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'NLK',

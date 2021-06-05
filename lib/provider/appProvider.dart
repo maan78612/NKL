@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:nlk/constants/app_constants.dart';
+import 'package:nlk/modal/categories.dart';
 import 'package:nlk/utilities/validator.dart';
 
 class AppProvider extends ChangeNotifier {
@@ -66,4 +68,26 @@ class AppProvider extends ChangeNotifier {
 /////////////////////////////////////////// DashBoard///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////
 
+  onInitDash() {
+    categoryData();
+  }
+
+  List<Category> categoryList = [];
+  void categoryData() {
+    categoryList.clear();
+    categoryList
+        .add(Category(icon: AppConfig.images.realEstate, title: "Real Estate"));
+    categoryList.add(Category(icon: AppConfig.images.jobs, title: "Jobs"));
+    categoryList
+        .add(Category(icon: AppConfig.images.business, title: "Business"));
+    categoryList
+        .add(Category(icon: AppConfig.images.fashion, title: "Fashion"));
+    categoryList.add(Category(icon: AppConfig.images.events, title: "Events"));
+    categoryList.add(
+        Category(icon: AppConfig.images.electronics, title: "Electronics"));
+
+    print("${categoryList.length}");
+
+    notifyListeners();
+  }
 }
