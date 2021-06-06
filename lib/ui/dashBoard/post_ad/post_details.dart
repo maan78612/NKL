@@ -5,6 +5,7 @@ import 'package:multi_image_picker2/multi_image_picker2.dart';
 import 'package:nlk/constants/app_constants.dart';
 import 'package:nlk/modal/ad.dart';
 import 'package:nlk/provider/appProvider.dart';
+import 'package:nlk/ui/dashBoard/post_ad/success_ad_post.dart';
 import 'package:nlk/ui/widgets/my_button.dart';
 import 'package:nlk/ui/widgets/top_bar.dart';
 import 'package:provider/provider.dart';
@@ -63,7 +64,9 @@ class ReviewAd extends StatelessWidget {
                           EdgeInsets.symmetric(horizontal: Get.width * 0.1),
                       child: MyButton(
                         title: "Publish",
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(SuccessAdPost());
+                        },
                       ),
                     ),
                     SizedBox(

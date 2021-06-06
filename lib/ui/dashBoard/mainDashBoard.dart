@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nlk/constants/app_constants.dart';
 import 'package:nlk/provider/appProvider.dart';
+import 'package:nlk/ui/dashBoard/chat/chat_people.dart';
 import 'package:nlk/ui/dashBoard/post_ad/select_category.dart';
+import 'package:nlk/ui/dashBoard/profile/profile.dart';
 import 'package:provider/provider.dart';
 
 import 'Home/home.dart';
@@ -90,12 +92,8 @@ class _DashBoardState extends State<DashBoard> {
             children: <Widget>[
               Home(),
               SelectCategoryToPostAd(),
-              Container(
-                color: Colors.green,
-              ),
-              Container(
-                color: Colors.blue,
-              ),
+              ChatPeople(),
+              Profile()
             ],
           ),
         ),
