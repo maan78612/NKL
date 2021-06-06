@@ -21,4 +21,6 @@ class AssetImages {
   String favoriteFillIcon = "assets/images/favorite_fill_icon.png";
   String backIcon = "assets/images/backIcon.png";
   String dropDownIcon = "assets/images/dropDownIcon.png";
+  String laptop = "assets/images/laptop.png";
+  String person = "assets/images/person.png";
 }

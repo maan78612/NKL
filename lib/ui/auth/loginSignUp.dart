@@ -120,7 +120,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
           ),
           body: SingleChildScrollView(
             child: Container(
-              height: Get.height,
+              height: Get.height * 0.8,
               width: Get.width,
               margin: EdgeInsets.symmetric(
                   vertical: Get.height * 0.01, horizontal: Get.width * 0.02),
@@ -129,7 +129,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
-                      flex: 2,
+                      flex: 1,
                       child: Container(
                         margin: EdgeInsets.only(left: 80, right: 80),
                         width: Get.width * 0.7,
@@ -350,7 +350,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                                     Align(
                                       alignment: Alignment.centerRight,
                                       child: TextButton(
-                                        child: Text('forgot_password',
+                                        child: Text('forgot password',
                                             style: GoogleFonts.poppins(
                                                 color:
                                                     AppConfig.colors.themeColor,
@@ -881,7 +881,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                                                 height: Get.height * .065,
                                                 child: Center(
                                                   child: Text(
-                                                    'signup',
+                                                    'SIGN UP',
                                                     style: GoogleFonts.poppins(
                                                         fontSize: 16,
                                                         fontWeight:

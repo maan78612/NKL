@@ -31,59 +31,55 @@ class _DashBoardState extends State<DashBoard> {
       return Scaffold(
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(70),
-            child: Stack(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            spreadRadius: 2,
-                            blurRadius: 2,
-                            color: AppConfig.colors.blackColor.withOpacity(.16))
-                      ],
-                      color: AppConfig.colors.whiteColor,
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(15),
-                          bottomRight: Radius.circular(15))),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 22),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 15, right: 10),
-                              child: Image.asset(
-                                AppConfig.images.locationIcon,
-                                scale: 4,
-                              ),
-                            ),
-                            Text(
-                              'Karachi, Pakistan',
-                              style: GoogleFonts.poppins(
-                                fontSize: 18.0,
-                                color: AppConfig.colors.themeColor,
-                                height: 1.06,
-                              ),
-                            ),
-                            Spacer(),
-                            Padding(
-                              padding: EdgeInsets.only(right: 20),
-                              child: Image.asset(
-                                AppConfig.images.bellIcon,
-                                scale: 4,
-                              ),
-                            ),
-                          ],
+            child: Container(
+              decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                        spreadRadius: 2,
+                        blurRadius: 2,
+                        color: AppConfig.colors.blackColor.withOpacity(.16))
+                  ],
+                  color: AppConfig.colors.whiteColor,
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15),
+                      bottomRight: Radius.circular(15))),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 22),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 15, right: 10),
+                          child: Image.asset(
+                            AppConfig.images.locationIcon,
+                            scale: 4,
+                          ),
                         ),
-                      ),
-                    ],
+                        Text(
+                          'Karachi, Pakistan',
+                          style: GoogleFonts.poppins(
+                            fontSize: 18.0,
+                            color: AppConfig.colors.themeColor,
+                            height: 1.06,
+                          ),
+                        ),
+                        Spacer(),
+                        Padding(
+                          padding: EdgeInsets.only(right: 20),
+                          child: Image.asset(
+                            AppConfig.images.bellIcon,
+                            scale: 4,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             )),
         body: SizedBox.expand(
           child: PageView(
