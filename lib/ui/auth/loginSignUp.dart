@@ -5,6 +5,7 @@ import 'package:nlk/UI/Shared/Congratulations.dart';
 import 'package:nlk/constants/app_constants.dart';
 import 'package:nlk/provider/appProvider.dart';
 import 'package:nlk/ui/dashBoard/mainDashBoard.dart';
+import 'package:nlk/ui/shared/forget_password.dart';
 import 'package:nlk/utilities/validator.dart';
 import 'package:provider/provider.dart';
 
@@ -145,11 +146,13 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                           physics: NeverScrollableScrollPhysics(),
                           isScrollable: false,
                           labelStyle: GoogleFonts.poppins(
-                              fontSize: 16, fontWeight: FontWeight.w700),
+                              fontSize: Get.height * 0.022,
+                              fontWeight: FontWeight.w700),
                           labelColor: AppConfig.colors.themeColor,
                           unselectedLabelColor: AppConfig.colors.blackColor,
                           unselectedLabelStyle: GoogleFonts.poppins(
-                              fontSize: 14, fontWeight: FontWeight.w500),
+                              fontSize: Get.height * 0.02,
+                              fontWeight: FontWeight.w500),
                           controller: _controller,
                           tabs: [
                             Tab(text: 'LOG IN'),
@@ -286,7 +289,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                                             GoogleFonts.poppins(fontSize: 14),
                                         decoration: InputDecoration(
                                           isDense: true,
-                                          hintText: "name",
+                                          hintText: "password",
                                           suffixIcon: GestureDetector(
                                             onTap: () {
                                               showPass();
@@ -357,9 +360,8 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 13)),
                                         onPressed: () {
-                                          // Get.bottomSheet(ForgotPassword(
-                                          //   title: 'Forgot Password',
-                                          // ));
+                                          Get.bottomSheet(
+                                              ForgotPasswordDialog());
                                         },
                                       ),
                                     ),
@@ -387,7 +389,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                                           child: Text(
                                             'LOG IN',
                                             style: GoogleFonts.poppins(
-                                                fontSize: 16,
+                                                fontSize: Get.height * 0.035,
                                                 fontWeight: FontWeight.w600,
                                                 color: AppConfig
                                                     .colors.whiteColor),
@@ -883,7 +885,8 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                                                   child: Text(
                                                     'SIGN UP',
                                                     style: GoogleFonts.poppins(
-                                                        fontSize: 16,
+                                                        fontSize:
+                                                            Get.height * 0.035,
                                                         fontWeight:
                                                             FontWeight.w600,
                                                         color: AppConfig

@@ -4,18 +4,15 @@ import 'package:nlk/constants/app_constants.dart';
 import 'package:nlk/modal/ad.dart';
 import 'package:nlk/provider/appProvider.dart';
 import 'package:nlk/ui/widgets/product.dart';
-import 'package:nlk/ui/widgets/selection_tile.dart';
 import 'package:nlk/ui/widgets/top_bar.dart';
 import 'package:provider/provider.dart';
 
-class MyAds extends StatefulWidget {
+class TrendingAdds extends StatefulWidget {
   @override
-  _MyAdsState createState() => _MyAdsState();
+  _TrendingAddsState createState() => _TrendingAddsState();
 }
 
-class _MyAdsState extends State<MyAds> {
-  List<String> filters = ["All", "Active", "Expired"];
-  int selectedIndex = 0;
+class _TrendingAddsState extends State<TrendingAdds> {
   @override
   Widget build(BuildContext context) {
     return Consumer<AppProvider>(
@@ -28,15 +25,8 @@ class _MyAdsState extends State<MyAds> {
                       height: Get.height * 0.03,
                     ),
                     TopBar(
-                      withBackButton: true,
-                      title: "Profile",
-                    ),
-                    SizedBox(
-                      height: Get.height * 0.02,
-                    ),
-                    filter(),
-                    SizedBox(
-                      height: Get.height * 0.02,
+                      withBackButton: false,
+                      title: "Trending Ads",
                     ),
                     Expanded(
                       child: Container(
@@ -72,29 +62,5 @@ class _MyAdsState extends State<MyAds> {
                 ),
               ),
             ));
-  }
-
-  Widget filter() {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: Get.width * 0.04,
-      ),
-      child: Row(
-          children: List.generate(3, (index) {
-        return Expanded(
-            child: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: SelectionTile(
-            text: filters[index],
-            isSelected: index == selectedIndex,
-            onTap: () {
-              setState(() {
-                selectedIndex = index;
-              });
-            },
-          ),
-        ));
-      })),
-    );
   }
 }

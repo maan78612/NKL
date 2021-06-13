@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:nlk/provider/authProvider.dart';
+import 'package:nlk/provider/notificationScroll.dart';
 import 'package:provider/provider.dart';
 
 import 'UI/splash_screen.dart';
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AppProvider()),
-        ChangeNotifierProvider(create: (_) => AuthProvider())
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => ScrollEventNotifier(false))
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,

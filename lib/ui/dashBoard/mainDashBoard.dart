@@ -1,11 +1,14 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nlk/constants/app_constants.dart';
 import 'package:nlk/provider/appProvider.dart';
 import 'package:nlk/ui/dashBoard/chat/chat_people.dart';
 import 'package:nlk/ui/dashBoard/post_ad/select_category.dart';
 import 'package:nlk/ui/dashBoard/profile/profile.dart';
+import 'package:nlk/ui/dashBoard/trending_add/trending_adds.dart';
+import 'package:nlk/ui/shared/notifications.dart';
 import 'package:provider/provider.dart';
 
 import 'Home/home.dart';
@@ -70,11 +73,16 @@ class _DashBoardState extends State<DashBoard> {
                           ),
                         ),
                         Spacer(),
-                        Padding(
-                          padding: EdgeInsets.only(right: 20),
-                          child: Image.asset(
-                            AppConfig.images.bellIcon,
-                            scale: 4,
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(Notifications());
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.only(right: 20),
+                            child: Image.asset(
+                              AppConfig.images.bellIcon,
+                              scale: 4,
+                            ),
                           ),
                         ),
                       ],
@@ -91,6 +99,7 @@ class _DashBoardState extends State<DashBoard> {
             },
             children: <Widget>[
               Home(),
+              TrendingAdds(),
               SelectCategoryToPostAd(),
               ChatPeople(),
               Profile()
@@ -99,6 +108,7 @@ class _DashBoardState extends State<DashBoard> {
         ),
         bottomNavigationBar: BottomNavyBar(
           selectedIndex: appProvider.selectedIndex,
+
           showElevation: true, // use this to remove appBar's elevation
           onItemSelected: (index) {
             appProvider.dashBoardNavigation(index);
@@ -111,6 +121,24 @@ class _DashBoardState extends State<DashBoard> {
                 ),
                 title: Text(
                   ' Home',
+                  style: GoogleFonts.poppins(
+                      color: AppConfig.colors.themeColor,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold),
+                ),
+                activeColor: AppConfig.colors.themeColor,
+                inactiveColor: AppConfig.colors.blackGrey),
+            BottomNavyBarItem(
+                textAlign: TextAlign.center,
+                icon: Image.asset(
+                  AppConfig.images.trending,
+                  color: appProvider.selectedIndex != 1
+                      ? AppConfig.colors.blackGrey
+                      : AppConfig.colors.themeColor,
+                  scale: 6,
+                ),
+                title: Text(
+                  ' Trending',
                   style: GoogleFonts.poppins(
                       color: AppConfig.colors.themeColor,
                       fontSize: 14,

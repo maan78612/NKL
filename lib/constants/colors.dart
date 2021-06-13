@@ -12,4 +12,6 @@ class AppColors {
   Color fieldTitleColor = Color(0xff748A9D);
   Color blackGrey = Color(0xff4D4D4D);
   Color lightBlue = Color(0xffEBF6FF);
+  Color textColor = Color(0xff1D2226);
+  Color textColor2 = Color(0xff707070);
 }

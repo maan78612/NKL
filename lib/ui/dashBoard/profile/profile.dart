@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nlk/constants/app_constants.dart';
 import 'package:nlk/provider/appProvider.dart';
 import 'package:nlk/ui/dashBoard/profile/my_ads.dart';
+import 'package:nlk/ui/shared/notifications.dart';
 import 'package:nlk/ui/widgets/top_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -139,8 +140,8 @@ class Profile extends StatelessWidget {
       child: ListTile(
         onTap: () => onTapped(index),
         leading: Container(
-          height: Get.height * 0.05,
-          width: Get.height * 0.05,
+          height: Get.width * 0.11,
+          width: Get.width * 0.11,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
             color: AppConfig.colors.lightBlue,
@@ -150,11 +151,11 @@ class Profile extends StatelessWidget {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(Get.width * 0.02),
             child: SvgPicture.string(
               iconsList[index],
-              width: 24,
-              height: 24,
+              width: Get.width * 0.4,
+              height: Get.width * 0.4,
             ),
           ),
         ),
@@ -204,7 +205,9 @@ class Profile extends StatelessWidget {
         {}
         break;
       case 3:
-        {}
+        {
+          Get.to(Notifications());
+        }
         break;
       case 4:
         {}

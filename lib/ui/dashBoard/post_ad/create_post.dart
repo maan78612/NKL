@@ -56,6 +56,9 @@ class _CreateAdState extends State<CreateAd> {
                         onTap: reviewAd,
                       ),
                     ),
+                    SizedBox(
+                      height: Get.height * 0.04,
+                    ),
                   ],
                 ),
               ),

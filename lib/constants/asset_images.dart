@@ -23,4 +23,10 @@ class AssetImages {
   String dropDownIcon = "assets/images/dropDownIcon.png";
   String laptop = "assets/images/laptop.png";
   String person = "assets/images/person.png";
+  String changePasswordIcon = "assets/images/changePasswordIcon.png";
+  String currentLocation = "assets/images/currentLocation.png";
+  String locationSearch = "assets/images/locationSearch.png";
+  String tick = "assets/images/tick.png";
+  String filter = "assets/images/filter.png";
+  String trending = "assets/images/trending.png";
 }

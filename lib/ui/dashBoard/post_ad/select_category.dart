@@ -17,7 +17,7 @@ class SelectCategoryToPostAd extends StatelessWidget {
               child: Column(
                 children: [
                   TopBar(
-                    withBackButton: true,
+                    withBackButton: false,
                     title: "What are you offering?",
                   ),
                   SizedBox(

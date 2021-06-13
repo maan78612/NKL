@@ -23,6 +23,8 @@ class AppProvider extends ChangeNotifier {
   bool selectTerms = false;
   File image;
 
+  double refineDistance = 0.0;
+
   Future<void> matchPassProvider(String value, pass, confrimPass) async {
     if (FieldValidator.validateConfirmPassword(value) ==
         "Confirm Password is Required") {
@@ -70,6 +72,7 @@ class AppProvider extends ChangeNotifier {
 
   int selectedIndex = 0;
   PageController pageController;
+  Category selectedCategory;
 
   dashBoardNavigation(int index) {
     selectedIndex = index;
@@ -103,4 +106,19 @@ class AppProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  void selectCategoryFunc({Category data}) {
+    selectedCategory = data;
+    notifyListeners();
+    print(selectedCategory.title);
+  }
+
+  void selectDistanceFunc({double distance}) {
+    refineDistance = distance;
+    notifyListeners();
+    print(refineDistance);
+  }
+  //temporary
+
+  List<String> recentLocation = ["Karachi", "Lahore", "Peshawar"];
 }

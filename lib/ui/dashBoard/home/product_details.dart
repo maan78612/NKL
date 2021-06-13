@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nlk/constants/app_constants.dart';
+import 'package:nlk/ui/dashBoard/home/seller_profile.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({Key key}) : super(key: key);
@@ -234,13 +235,18 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                 ),
                 SizedBox(height: Get.height * 0.008),
-                Text(
-                  'See Profile',
-                  style: GoogleFonts.roboto(
-                    fontSize: 10.0,
-                    color: AppConfig.colors.themeColor,
-                    fontWeight: FontWeight.w700,
-                    height: 1.4,
+                InkWell(
+                  onTap: () {
+                    Get.to(SellerProfile());
+                  },
+                  child: Text(
+                    'See Profile',
+                    style: GoogleFonts.roboto(
+                      fontSize: 12.0,
+                      color: AppConfig.colors.themeColor,
+                      fontWeight: FontWeight.w700,
+                      height: 1.4,
+                    ),
                   ),
                 ),
               ],
@@ -255,30 +261,61 @@ class _ProductDetailsState extends State<ProductDetails> {
         ),
         SizedBox(height: Get.height * 0.03),
         Center(
-          child: GestureDetector(
-            onTap: () {},
-            child: Container(
-              width: Get.width * 0.45,
-              height: Get.height * 0.05,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.0),
-                color: AppConfig.colors.themeColor,
-                border: Border.all(
-                  width: 1.0,
-                  color: const Color(0xFF707070),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  width: Get.width * 0.4,
+                  height: Get.height * 0.05,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12.0),
+                    color: AppConfig.colors.whiteColor,
+                    border: Border.all(
+                      width: 1.0,
+                      color: AppConfig.colors.themeColor,
+                    ),
+                  ),
+                  child: Text(
+                    'Comment',
+                    style: GoogleFonts.roboto(
+                      fontSize: Get.height * 0.025,
+                      color: AppConfig.colors.themeColor,
+                      fontWeight: FontWeight.w700,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
-              child: Text(
-                'Start Chat',
-                style: GoogleFonts.roboto(
-                  fontSize: 18.0,
-                  color: AppConfig.colors.whiteColor,
-                  fontWeight: FontWeight.w700,
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  width: Get.width * 0.4,
+                  height: Get.height * 0.05,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12.0),
+                    color: AppConfig.colors.themeColor,
+                    border: Border.all(
+                      width: 1.0,
+                      color: const Color(0xFF707070),
+                    ),
+                  ),
+                  child: Text(
+                    'Start Chat',
+                    style: GoogleFonts.roboto(
+                      fontSize: Get.height * 0.025,
+                      color: AppConfig.colors.whiteColor,
+                      fontWeight: FontWeight.w700,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-                textAlign: TextAlign.center,
-              ),
-            ),
+              )
+            ],
           ),
         ),
         SizedBox(height: Get.height * 0.02),

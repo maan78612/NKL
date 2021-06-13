@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nlk/constants/app_constants.dart';
@@ -8,7 +7,6 @@ import 'package:nlk/modal/categories.dart';
 import 'package:nlk/provider/appProvider.dart';
 import 'package:nlk/ui/widgets/category.dart';
 import 'package:nlk/ui/widgets/product.dart';
-import 'package:nlk/utilities/validator.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
@@ -19,7 +17,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final TextEditingController locationSearchController =
       TextEditingController();
-
+  final ScrollController _scrollController = ScrollController();
   @override
   void dispose() {
     Provider.of<AppProvider>(context, listen: false).pageController.dispose();
@@ -32,6 +30,8 @@ class _HomeState extends State<Home> {
       return Scaffold(
         body: SingleChildScrollView(
           child: Container(
+            height: Get.height,
+            width: Get.width,
             margin: EdgeInsets.symmetric(
                 horizontal: Get.width * 0.02, vertical: Get.height * 0.02),
             child: Column(
@@ -72,28 +72,17 @@ class _HomeState extends State<Home> {
                   margin: EdgeInsets.symmetric(
                       horizontal: Get.width * 0.04,
                       vertical: Get.height * 0.01),
-                  child: CustomScrollView(
-                    shrinkWrap: true,
-                    slivers: [
-                      SliverGrid(
-                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                            mainAxisSpacing: 0,
-                            maxCrossAxisExtent: Get.width * .33,
-                            crossAxisSpacing: 0,
-                            childAspectRatio: .95,
-                            mainAxisExtent: Get.height * 0.15),
-                        delegate: SliverChildBuilderDelegate(
-                          (BuildContext context, int index) {
-                            Category cat = appProvider.categoryList[index];
-                            return CategoryWidget(
-                              category: cat,
-                            );
-                          },
-                          childCount: 6,
-                        ),
-                      )
-                    ],
-                  ),
+                  child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: List.generate(appProvider.categoryList.length,
+                            (index) {
+                          Category cat = appProvider.categoryList[index];
+                          return CategoryWidget(
+                            category: cat,
+                          );
+                        }),
+                      )),
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(
@@ -124,22 +113,17 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: Get.width * 0.04,
-                      vertical: Get.height * 0.01),
-                  child: CustomScrollView(
-                    shrinkWrap: true,
-                    slivers: [
-                      SliverGrid(
-                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                          mainAxisSpacing: 15,
-                          maxCrossAxisExtent: Get.width * .5,
-                          crossAxisSpacing: 0,
-                          childAspectRatio: 0.92,
-                        ),
-                        delegate: SliverChildBuilderDelegate(
-                          (BuildContext context, int index) {
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(vertical: Get.height * 0.01),
+                    child: Center(
+                      child: Scrollbar(
+                        isAlwaysShown: true,
+                        showTrackOnHover: true,
+                        controller: _scrollController,
+                        child: ListView(
+                          controller: _scrollController,
+                          children: List.generate(10, (index) {
                             Ad ad = Ad(
                                 itemName: "Iphone",
                                 images: [AppConfig.images.image1],
@@ -150,12 +134,12 @@ class _HomeState extends State<Home> {
                                 postedBy: "");
                             return Product(
                               ad: ad,
+                              index: index,
                             );
-                          },
-                          childCount: 10,
+                          }),
                         ),
-                      )
-                    ],
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -168,7 +152,7 @@ class _HomeState extends State<Home> {
 
   Widget searchBar() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(width: 10),
@@ -221,27 +205,27 @@ class _HomeState extends State<Home> {
                 fillColor: AppConfig.colors.themeColor,
                 filled: true,
                 hintStyle: GoogleFonts.poppins(
-                    fontSize: 16,
+                    fontSize: Get.width * 0.05,
                     color: AppConfig.colors.whiteColor,
                     fontWeight: FontWeight.bold),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                   borderSide: BorderSide(color: Color(0xffEEF9FF)),
                 ),
                 disabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                   borderSide: BorderSide(color: Color(0xffEEF9FF)),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                   borderSide: BorderSide(color: Color(0xffEEF9FF)),
                 ),
                 errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                   borderSide: BorderSide(color: Color(0xffEEF9FF)),
                 ),
                 focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(25)),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                   borderSide: BorderSide(color: Color(0xffEEF9FF)),
                 ),
               ),
@@ -253,18 +237,11 @@ class _HomeState extends State<Home> {
           child: InkWell(
             onTap: () {
               Get.bottomSheet(BottomSheetRefine(), isScrollControlled: true);
+              // Get.to(CountryCity());
             },
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'Refine ',
-                style: GoogleFonts.roboto(
-                  fontSize: 13.0,
-                  color: AppConfig.colors.themeColor,
-                  letterSpacing: 0.26,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
+              padding: EdgeInsets.all(Get.width * 0.01),
+              child: Image.asset(AppConfig.images.filter, scale: 4),
             ),
           ),
         ),
@@ -279,488 +256,577 @@ class BottomSheetRefine extends StatefulWidget {
 }
 
 class _BottomSheetRefineState extends State<BottomSheetRefine> {
-  TextEditingController fromController = TextEditingController();
-  TextEditingController toController = TextEditingController();
-  TextEditingController kilometerController = TextEditingController();
-
-  FocusNode fromFocusNode = new FocusNode();
-  FocusNode toFocusNode = new FocusNode();
-  FocusNode kilometerFocusNode = new FocusNode();
   @override
   void dispose() {
-    kilometerController.clear();
-    toController.clear();
-    fromController.clear();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      child: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).requestFocus(new FocusNode());
-        },
-        child: Container(
-            width: Get.width,
-            height: Get.height * .75,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(26),
-                  topRight: Radius.circular(26),
-                )),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: Get.height * 0.02),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(width: Get.width * 0.03),
-                      GestureDetector(
-                          onTap: () {
-                            Get.back();
-                          },
-                          child:
-                              Image.asset(AppConfig.images.backIcon, scale: 5)),
-                      Spacer(),
-                      Text(
-                        'Refine',
-                        style: GoogleFonts.roboto(
-                          fontSize: 22.0,
-                          color: const Color(0xFF1C1C1C),
-                          fontWeight: FontWeight.w700,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(width: Get.width * 0.03),
-                      Spacer(),
-                    ],
-                  ),
-                ),
-                Spacer(),
-                heading("Choose Category   "),
-                Container(
-                  width: Get.width * 0.45,
-                  height: Get.height * 0.052,
-                  margin: EdgeInsets.symmetric(
-                    vertical: Get.height * 0.03,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.0),
-                    color: AppConfig.colors.whiteColor,
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0xFF1F54C3).withOpacity(0.15),
-                        offset: Offset(0, 6.0),
-                        blurRadius: 20.0,
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(width: Get.width * 0.025),
-                      Text(
-                        'Select Category',
-                        style: GoogleFonts.roboto(
-                          fontSize: 13.0,
-                          color: const Color(0xFF1D2226).withOpacity(0.4),
-                          height: 1.08,
-                        ),
-                      ),
-                      GestureDetector(
-                          onTap: () {
-                            Get.back();
-                          },
-                          child: Image.asset(AppConfig.images.dropDownIcon,
-                              scale: 3)),
-                      SizedBox(width: Get.width * 0.025),
-                    ],
-                  ),
-                ),
-                heading("Price Range   "),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: Get.width * 0.1),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.symmetric(
-                          vertical: Get.height * 0.02,
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'From',
-                              style: GoogleFonts.roboto(
-                                fontSize: 13.0,
-                                color: const Color(0xFF1D2226).withOpacity(0.8),
-                                height: 1.08,
-                              ),
-                            ),
-                            Container(
-                                width: Get.width * 0.28,
-                                height: Get.height * 0.048,
-                                margin: EdgeInsets.symmetric(
-                                  vertical: Get.height * 0.01,
-                                ),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  color: AppConfig.colors.whiteColor,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: const Color(0xFF1F54C3)
-                                          .withOpacity(0.15),
-                                      offset: Offset(0, 6.0),
-                                      blurRadius: 20.0,
-                                    ),
-                                  ],
-                                ),
-                                child: TextFormField(
-                                  controller: fromController,
-                                  focusNode: fromFocusNode,
-                                  textInputAction: TextInputAction.next,
-                                  validator: FieldValidator.validateEmail,
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 13,
-                                  ),
-                                  inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
-                                  ],
-                                  textAlignVertical: TextAlignVertical.center,
-                                  decoration: InputDecoration(
-                                    contentPadding:
-                                        EdgeInsets.only(top: 5, left: 25),
-                                    suffixIcon: Icon(
-                                      Icons.attach_money_sharp,
-                                      color: AppConfig.colors.themeColor,
-                                    ),
-                                    isDense: true,
-                                    hintText: "0",
-                                    fillColor: AppConfig.colors.whiteColor,
-                                    filled: true,
-                                    hintStyle: TextStyle(
-                                        fontSize: 14,
-                                        color: AppConfig.colors.hintColor),
-                                    border: new OutlineInputBorder(
-                                        borderRadius: const BorderRadius.all(
-                                          const Radius.circular(12.0),
-                                        ),
-                                        borderSide: BorderSide(
-                                          color: Colors.white,
-                                        )),
-                                    focusedBorder: new OutlineInputBorder(
-                                        borderRadius: const BorderRadius.all(
-                                          const Radius.circular(12.0),
-                                        ),
-                                        borderSide: BorderSide(
-                                          color: Colors.white,
-                                        )),
-                                    enabledBorder: new OutlineInputBorder(
-                                        borderRadius: const BorderRadius.all(
-                                          const Radius.circular(12.0),
-                                        ),
-                                        borderSide: BorderSide(
-                                          color: Colors.white,
-                                        )),
-                                    errorBorder: new OutlineInputBorder(
-                                        borderRadius: const BorderRadius.all(
-                                          const Radius.circular(12.0),
-                                        ),
-                                        borderSide: BorderSide(
-                                          color: Colors.white,
-                                        )),
-                                    disabledBorder: new OutlineInputBorder(
-                                        borderRadius: const BorderRadius.all(
-                                          const Radius.circular(12.0),
-                                        ),
-                                        borderSide: BorderSide(
-                                          color: Colors.white,
-                                        )),
-                                  ),
-                                  onEditingComplete: () {
-                                    setState(() {
-                                      fromFocusNode.unfocus();
-                                    });
-                                  },
-                                  onFieldSubmitted: (val) {
-                                    setState(() {
-                                      FocusScope.of(Get.context)
-                                          .requestFocus(toFocusNode);
-                                    });
-                                  },
-                                  keyboardType: TextInputType.number,
-                                )),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.symmetric(
-                          vertical: Get.height * 0.02,
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'To',
-                              style: GoogleFonts.roboto(
-                                fontSize: 13.0,
-                                color: const Color(0xFF1D2226).withOpacity(0.8),
-                                height: 1.08,
-                              ),
-                            ),
-                            Container(
-                                width: Get.width * 0.28,
-                                height: Get.height * 0.048,
-                                margin: EdgeInsets.symmetric(
-                                  vertical: Get.height * 0.01,
-                                ),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  color: AppConfig.colors.whiteColor,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: const Color(0xFF1F54C3)
-                                          .withOpacity(0.15),
-                                      offset: Offset(0, 6.0),
-                                      blurRadius: 20.0,
-                                    ),
-                                  ],
-                                ),
-                                child: TextFormField(
-                                  controller: toController,
-                                  focusNode: toFocusNode,
-                                  textInputAction: TextInputAction.next,
-                                  validator: FieldValidator.validateEmail,
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 13,
-                                  ),
-                                  textAlignVertical: TextAlignVertical.center,
-                                  inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
-                                  ],
-                                  onFieldSubmitted: (val) {
-                                    setState(() {
-                                      FocusScope.of(Get.context)
-                                          .requestFocus(kilometerFocusNode);
-                                    });
-                                  },
-                                  decoration: InputDecoration(
-                                    contentPadding:
-                                        EdgeInsets.only(top: 5, left: 25),
-                                    suffixIcon: Icon(
-                                      Icons.attach_money_sharp,
-                                      color: AppConfig.colors.themeColor,
-                                    ),
-                                    isDense: true,
-                                    hintText: "0",
-                                    fillColor: AppConfig.colors.whiteColor,
-                                    filled: true,
-                                    hintStyle: TextStyle(
-                                        fontSize: 14,
-                                        color: AppConfig.colors.hintColor),
-                                    border: new OutlineInputBorder(
-                                        borderRadius: const BorderRadius.all(
-                                          const Radius.circular(12.0),
-                                        ),
-                                        borderSide: BorderSide(
-                                          color: Colors.white,
-                                        )),
-                                    focusedBorder: new OutlineInputBorder(
-                                        borderRadius: const BorderRadius.all(
-                                          const Radius.circular(12.0),
-                                        ),
-                                        borderSide: BorderSide(
-                                          color: Colors.white,
-                                        )),
-                                    enabledBorder: new OutlineInputBorder(
-                                        borderRadius: const BorderRadius.all(
-                                          const Radius.circular(12.0),
-                                        ),
-                                        borderSide: BorderSide(
-                                          color: Colors.white,
-                                        )),
-                                    errorBorder: new OutlineInputBorder(
-                                        borderRadius: const BorderRadius.all(
-                                          const Radius.circular(12.0),
-                                        ),
-                                        borderSide: BorderSide(
-                                          color: Colors.white,
-                                        )),
-                                    disabledBorder: new OutlineInputBorder(
-                                        borderRadius: const BorderRadius.all(
-                                          const Radius.circular(12.0),
-                                        ),
-                                        borderSide: BorderSide(
-                                          color: Colors.white,
-                                        )),
-                                  ),
-                                  onEditingComplete: () {
-                                    setState(() {
-                                      fromFocusNode.unfocus();
-                                    });
-                                  },
-                                  keyboardType: TextInputType.number,
-                                )),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                heading("Location   "),
-                Container(
-                  margin: EdgeInsets.symmetric(
-                    vertical: Get.height * 0.02,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Within',
-                        style: GoogleFonts.roboto(
-                          fontSize: 13.0,
-                          color: const Color(0xFF1D2226).withOpacity(0.8),
-                          height: 1.08,
-                        ),
-                      ),
-                      Container(
-                          width: Get.width * 0.28,
-                          height: Get.height * 0.048,
-                          margin: EdgeInsets.symmetric(
-                            vertical: Get.height * 0.01,
-                          ),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.0),
-                            color: AppConfig.colors.whiteColor,
-                            boxShadow: [
-                              BoxShadow(
-                                color:
-                                    const Color(0xFF1F54C3).withOpacity(0.15),
-                                offset: Offset(0, 6.0),
-                                blurRadius: 20.0,
-                              ),
-                            ],
-                          ),
-                          child: TextFormField(
-                            controller: kilometerController,
-                            focusNode: kilometerFocusNode,
-                            textInputAction: TextInputAction.done,
-                            validator: FieldValidator.validateEmail,
-                            style: GoogleFonts.poppins(
-                              fontSize: 13,
-                            ),
-                            textAlignVertical: TextAlignVertical.center,
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0-9]')),
-                            ],
-                            onFieldSubmitted: (_) {
-                              FocusScope.of(context).unfocus();
+    return Consumer<AppProvider>(builder: (context, appProvider, child) {
+      return SingleChildScrollView(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).requestFocus(new FocusNode());
+          },
+          child: Container(
+              width: Get.width,
+              height: Get.height * .55,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(26),
+                    topRight: Radius.circular(26),
+                  )),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: Get.height * 0.02),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(width: Get.width * 0.03),
+                        GestureDetector(
+                            onTap: () {
+                              Get.back();
                             },
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.only(top: 5, left: 25),
-                              suffixIcon: Icon(
-                                Icons.attach_money_sharp,
-                                color: AppConfig.colors.themeColor,
-                              ),
-                              isDense: true,
-                              hintText: "0",
-                              fillColor: AppConfig.colors.whiteColor,
-                              filled: true,
-                              hintStyle: TextStyle(
-                                  fontSize: 14,
-                                  color: AppConfig.colors.hintColor),
-                              border: new OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(12.0),
-                                  ),
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  )),
-                              focusedBorder: new OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(12.0),
-                                  ),
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  )),
-                              enabledBorder: new OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(12.0),
-                                  ),
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  )),
-                              errorBorder: new OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(12.0),
-                                  ),
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  )),
-                              disabledBorder: new OutlineInputBorder(
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(12.0),
-                                  ),
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
-                                  )),
-                            ),
-                            onEditingComplete: () {
-                              setState(() {
-                                fromFocusNode.unfocus();
-                              });
-                            },
-                            keyboardType: TextInputType.number,
-                          )),
-                    ],
+                            child: Image.asset(AppConfig.images.backIcon,
+                                scale: 5)),
+                        Spacer(),
+                        Text(
+                          'Refine',
+                          style: GoogleFonts.roboto(
+                            fontSize: 22.0,
+                            color: const Color(0xFF1C1C1C),
+                            fontWeight: FontWeight.w700,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(width: Get.width * 0.03),
+                        Spacer(),
+                      ],
+                    ),
                   ),
-                ),
-                Spacer(),
-              ],
-            )),
-      ),
-    );
+                  SizedBox(height: 20),
+                  heading("Refine Options"),
+                  SizedBox(height: 20),
+                  refineRows(
+                      heading: "Category",
+                      subHeading: "All Category",
+                      img: AppConfig.images.dropDownIcon,
+                      onChanged: () {}),
+                  Divider(
+                    endIndent: Get.width * 0.07,
+                    indent: Get.width * 0.07,
+                    thickness: 2,
+                  ),
+                  refineRows(
+                      heading: "Location",
+                      subHeading: "Karachi",
+                      img: AppConfig.images.dropDownIcon,
+                      onChanged: () {
+                        Get.bottomSheet(BottomSheetLocation(),
+                            isScrollControlled: true);
+                      }),
+                  Divider(
+                    endIndent: Get.width * 0.07,
+                    indent: Get.width * 0.07,
+                    thickness: 2,
+                  ),
+                  distanceRow(
+                      heading: "Distance",
+                      subHeading: "${appProvider.refineDistance} km",
+                      img: AppConfig.images.dropDownIcon,
+                      onChanged: (value) {
+                        appProvider.selectDistanceFunc(distance: value);
+                      },
+                      appProvider: appProvider),
+                  Spacer(),
+                ],
+              )),
+        ),
+      );
+    });
   }
 
   Widget heading(String title) {
     return Align(
       alignment: Alignment.centerLeft,
       child: Container(
-        width: Get.width * 0.5,
-        margin: EdgeInsets.only(left: 20),
+        width: Get.width,
+        decoration: BoxDecoration(
+          color: AppConfig.colors.lightBlue,
+          border: Border(
+              top: BorderSide(color: AppConfig.colors.themeColor, width: 1),
+              bottom: BorderSide(color: AppConfig.colors.themeColor, width: 1)),
+        ),
         padding: EdgeInsets.symmetric(
             vertical: Get.height * 0.015, horizontal: Get.width * 0.02),
-        color: AppConfig.colors.lightBlue,
         child: Text(
           '$title',
           style: GoogleFonts.roboto(
-            fontSize: 18.0,
-            color: Colors.black,
-            letterSpacing: 0.36,
-            fontWeight: FontWeight.w700,
+            fontSize: 19.0,
+            color: AppConfig.colors.textColor,
+            height: 1.05,
           ),
         ),
+      ),
+    );
+  }
+
+  _dropdownField(
+      {String hintText,
+      String img,
+      List<Category> itemsList,
+      Category selectedItem,
+      Function onChanged}) {
+    print("items list length = ${itemsList.length}");
+    return itemsList.length == 0
+        ? Container()
+        : Container(
+            width: Get.width * 0.45,
+            height: Get.height * 0.052,
+            margin: EdgeInsets.symmetric(
+              vertical: Get.height * 0.03,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12.0),
+              color: AppConfig.colors.whiteColor,
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xFF1F54C3).withOpacity(0.15),
+                  offset: Offset(0, 6.0),
+                  blurRadius: 20.0,
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(width: Get.width * 0.025),
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    constraints: BoxConstraints(maxWidth: Get.width * 0.54),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton(
+                        isExpanded: true,
+                        underline: SizedBox(),
+                        icon: Image.asset(AppConfig.images.dropDownIcon,
+                            scale: 3),
+                        items: List.generate(itemsList.length, (index) {
+                          return DropdownMenuItem(
+                            child: ConstrainedBox(
+                              constraints:
+                                  BoxConstraints(maxWidth: Get.width * 0.4),
+                              child: Text(
+                                itemsList[index].title,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            value: itemsList[index],
+                          );
+                        }),
+                        hint: Text("$hintText",
+                            style: GoogleFonts.roboto(
+                              fontSize: 13.0,
+                              color: const Color(0xFF1D2226).withOpacity(0.4),
+                              height: 1.08,
+                            )),
+                        value: selectedItem,
+                        onChanged: onChanged,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: Get.width * 0.025),
+              ],
+            ),
+          );
+  }
+
+  Widget refineRows(
+      {String heading, String img, String subHeading, Function onChanged}) {
+    return GestureDetector(
+      onTap: onChanged,
+      child: Container(
+        width: Get.width,
+        height: Get.height * 0.052,
+        margin: EdgeInsets.symmetric(
+          vertical: Get.height * 0.01,
+          horizontal: Get.width * 0.04,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              '$heading',
+              style: GoogleFonts.roboto(
+                fontSize: 17.0,
+                color: AppConfig.colors.textColor2,
+                height: 1.06,
+              ),
+            ),
+            Spacer(),
+            Text(
+              '$subHeading',
+              style: GoogleFonts.roboto(
+                fontSize: 17.0,
+                color: Colors.black,
+                height: 1.06,
+              ),
+            ),
+            SizedBox(width: 10),
+            Image.asset(AppConfig.images.dropDownIcon, scale: 3),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget distanceRow(
+      {String heading,
+      String img,
+      String subHeading,
+      Function onChanged,
+      AppProvider appProvider}) {
+    return Container(
+      width: Get.width,
+      height: Get.height * 0.052,
+      margin: EdgeInsets.symmetric(
+        vertical: Get.height * 0.01,
+        horizontal: Get.width * 0.04,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            '$heading',
+            style: GoogleFonts.roboto(
+              fontSize: 17.0,
+              color: AppConfig.colors.textColor2,
+              height: 1.06,
+            ),
+          ),
+          Spacer(),
+          SliderTheme(
+            data: SliderTheme.of(context).copyWith(
+              activeTrackColor: AppConfig.colors.themeColor,
+              inactiveTrackColor: AppConfig.colors.fieldBorderColor,
+              trackShape: RoundedRectSliderTrackShape(),
+              trackHeight: 3.0,
+              thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.0),
+              thumbColor: AppConfig.colors.themeColor,
+              overlayColor: AppConfig.colors.enableBorderColor,
+              overlayShape: RoundSliderOverlayShape(overlayRadius: 20.0),
+              tickMarkShape: RoundSliderTickMarkShape(),
+              activeTickMarkColor: AppConfig.colors.themeColor,
+              inactiveTickMarkColor: AppConfig.colors.fieldBorderColor,
+              valueIndicatorShape: PaddleSliderValueIndicatorShape(),
+              valueIndicatorColor: AppConfig.colors.themeColor,
+              valueIndicatorTextStyle: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            child: Container(
+              width: Get.width * 0.55,
+              child: Slider(
+                value: appProvider.refineDistance,
+                min: 0,
+                max: 30,
+                divisions: 30,
+                label: '${appProvider.refineDistance}',
+                onChanged: onChanged,
+              ),
+            ),
+          ),
+          Spacer(),
+          Text(
+            '$subHeading',
+            style: GoogleFonts.roboto(
+              fontSize: 17.0,
+              color: Colors.black,
+              height: 1.06,
+            ),
+          ),
+          SizedBox(width: 10),
+          Image.asset(AppConfig.images.dropDownIcon, scale: 3),
+        ],
+      ),
+    );
+  }
+}
+
+class BottomSheetLocation extends StatefulWidget {
+  @override
+  _BottomSheetLocationState createState() => _BottomSheetLocationState();
+}
+
+class _BottomSheetLocationState extends State<BottomSheetLocation> {
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<AppProvider>(builder: (context, appProvider, child) {
+      return SingleChildScrollView(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).requestFocus(new FocusNode());
+          },
+          child: Container(
+              width: Get.width,
+              height: Get.height * .75,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(26),
+                    topRight: Radius.circular(26),
+                  )),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: Get.height * 0.02),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(width: Get.width * 0.03),
+                        GestureDetector(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Image.asset(AppConfig.images.backIcon,
+                                scale: 5)),
+                        Spacer(),
+                        Text(
+                          'Choose your location',
+                          style: GoogleFonts.roboto(
+                            fontSize: 22.0,
+                            color: const Color(0xFF1C1C1C),
+                            fontWeight: FontWeight.w700,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(width: Get.width * 0.03),
+                        Spacer(),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  heading("YOUR LOCATION"),
+                  SizedBox(height: 20),
+                  refineRows(
+                      heading: "Search location",
+                      img: AppConfig.images.locationSearch,
+                      onChanged: () {}),
+                  Divider(
+                    endIndent: Get.width * 0.07,
+                    indent: Get.width * 0.07,
+                    thickness: 2,
+                  ),
+                  refineRows(
+                      heading: "Use current Location",
+                      img: AppConfig.images.currentLocation,
+                      onChanged: () {}),
+                  Divider(
+                    endIndent: Get.width * 0.07,
+                    indent: Get.width * 0.07,
+                    thickness: 2,
+                  ),
+                  Spacer(),
+                  heading("RECENT LOCATIONS"),
+                  Column(
+                    children: List.generate(3, (index) {
+                      String loc = appProvider.recentLocation[index];
+                      return recentLocation(
+                          heading: "$loc",
+                          img: AppConfig.images.tick,
+                          index: index,
+                          onChanged: () {});
+                    }),
+                  ),
+                  Spacer(),
+                ],
+              )),
+        ),
+      );
+    });
+  }
+
+  Widget heading(String title) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Container(
+        width: Get.width,
+        decoration: BoxDecoration(
+          color: AppConfig.colors.lightBlue,
+          border: Border(
+              top: BorderSide(color: AppConfig.colors.themeColor, width: 1),
+              bottom: BorderSide(color: AppConfig.colors.themeColor, width: 1)),
+        ),
+        padding: EdgeInsets.symmetric(
+            vertical: Get.height * 0.015, horizontal: Get.width * 0.02),
+        child: Text(
+          '$title',
+          style: GoogleFonts.roboto(
+            fontSize: 19.0,
+            color: AppConfig.colors.textColor,
+            height: 1.05,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget refineRows({String heading, String img, Function onChanged}) {
+    return GestureDetector(
+      onTap: onChanged,
+      child: Container(
+        width: Get.width,
+        height: Get.height * 0.052,
+        margin: EdgeInsets.symmetric(
+          vertical: Get.height * 0.01,
+          horizontal: Get.width * 0.04,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset(img, scale: 4),
+            SizedBox(width: 10),
+            Text(
+              '$heading',
+              style: GoogleFonts.roboto(
+                fontSize: 17.0,
+                color: AppConfig.colors.textColor2,
+                height: 1.06,
+              ),
+            ),
+            Spacer(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget recentLocation(
+      {String heading, String img, Function onChanged, int index}) {
+    return GestureDetector(
+      onTap: onChanged,
+      child: Container(
+        width: Get.width,
+        height: Get.height * 0.052,
+        margin: EdgeInsets.symmetric(
+          vertical: Get.height * 0.01,
+          horizontal: Get.width * 0.04,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              '$heading',
+              style: GoogleFonts.roboto(
+                fontSize: 17.0,
+                color: AppConfig.colors.textColor2,
+                height: 1.06,
+              ),
+            ),
+            Spacer(),
+            if (index == 1) Image.asset(img, scale: 4),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget distanceRow(
+      {String heading,
+      String img,
+      String subHeading,
+      Function onChanged,
+      AppProvider appProvider}) {
+    return Container(
+      width: Get.width,
+      height: Get.height * 0.052,
+      margin: EdgeInsets.symmetric(
+        vertical: Get.height * 0.01,
+        horizontal: Get.width * 0.04,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            '$heading',
+            style: GoogleFonts.roboto(
+              fontSize: 17.0,
+              color: AppConfig.colors.textColor2,
+              height: 1.06,
+            ),
+          ),
+          Spacer(),
+          SliderTheme(
+            data: SliderTheme.of(context).copyWith(
+              activeTrackColor: AppConfig.colors.themeColor,
+              inactiveTrackColor: AppConfig.colors.fieldBorderColor,
+              trackShape: RoundedRectSliderTrackShape(),
+              trackHeight: 3.0,
+              thumbShape: RoundSliderThumbShape(enabledThumbRadius: 10.0),
+              thumbColor: AppConfig.colors.themeColor,
+              overlayColor: AppConfig.colors.enableBorderColor,
+              overlayShape: RoundSliderOverlayShape(overlayRadius: 20.0),
+              tickMarkShape: RoundSliderTickMarkShape(),
+              activeTickMarkColor: AppConfig.colors.themeColor,
+              inactiveTickMarkColor: AppConfig.colors.fieldBorderColor,
+              valueIndicatorShape: PaddleSliderValueIndicatorShape(),
+              valueIndicatorColor: AppConfig.colors.themeColor,
+              valueIndicatorTextStyle: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            child: Container(
+              width: Get.width * 0.55,
+              child: Slider(
+                value: appProvider.refineDistance,
+                min: 0,
+                max: 30,
+                divisions: 30,
+                label: '${appProvider.refineDistance}',
+                onChanged: onChanged,
+              ),
+            ),
+          ),
+          Spacer(),
+          Text(
+            '$subHeading',
+            style: GoogleFonts.roboto(
+              fontSize: 17.0,
+              color: Colors.black,
+              height: 1.06,
+            ),
+          ),
+          SizedBox(width: 10),
+          Image.asset(AppConfig.images.dropDownIcon, scale: 3),
+        ],
       ),
     );
   }

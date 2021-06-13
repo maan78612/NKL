@@ -10,20 +10,20 @@ class CategoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(
-          vertical: Get.height * 0.01, horizontal: Get.width * 0.01),
+          vertical: Get.height * 0.01, horizontal: Get.width * 0.035),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Image.asset(
             category.icon,
-            scale: 4,
+            scale: Get.width * 0.011,
           ),
           SizedBox(height: 10),
           Text(
             '${category.title}',
             style: GoogleFonts.roboto(
-              fontSize: 11.0,
+              fontSize: 12.0,
               color: const Color(0xFF1D2226).withOpacity(0.8),
             ),
           ),

@@ -34,7 +34,7 @@ class TopBar extends StatelessWidget {
             child: Text(
               '$title',
               style: GoogleFonts.roboto(
-                fontSize: 25.0,
+                fontSize: Get.height * 0.032,
                 color: Colors.black,
                 letterSpacing: 0.75,
                 fontWeight: FontWeight.w700,
