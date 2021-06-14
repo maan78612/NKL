@@ -17,7 +17,7 @@ class CategoryWidget extends StatelessWidget {
         children: [
           Image.asset(
             category.icon,
-            scale: Get.width * 0.011,
+            scale: Get.width * 0.013,
           ),
           SizedBox(height: 10),
           Text(

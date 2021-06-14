@@ -108,7 +108,7 @@ class _DashBoardState extends State<DashBoard> {
         ),
         bottomNavigationBar: BottomNavyBar(
           selectedIndex: appProvider.selectedIndex,
-
+          iconSize: Get.width * 0.07,
           showElevation: true, // use this to remove appBar's elevation
           onItemSelected: (index) {
             appProvider.dashBoardNavigation(index);
@@ -123,7 +123,7 @@ class _DashBoardState extends State<DashBoard> {
                   ' Home',
                   style: GoogleFonts.poppins(
                       color: AppConfig.colors.themeColor,
-                      fontSize: 14,
+                      fontSize: Get.width * 0.038,
                       fontWeight: FontWeight.bold),
                 ),
                 activeColor: AppConfig.colors.themeColor,
@@ -135,13 +135,14 @@ class _DashBoardState extends State<DashBoard> {
                   color: appProvider.selectedIndex != 1
                       ? AppConfig.colors.blackGrey
                       : AppConfig.colors.themeColor,
-                  scale: 6,
+                  width: Get.width * 0.05,
+                  fit: BoxFit.cover,
                 ),
                 title: Text(
                   ' Trending',
                   style: GoogleFonts.poppins(
                       color: AppConfig.colors.themeColor,
-                      fontSize: 14,
+                      fontSize: Get.width * 0.038,
                       fontWeight: FontWeight.bold),
                 ),
                 activeColor: AppConfig.colors.themeColor,
@@ -155,7 +156,7 @@ class _DashBoardState extends State<DashBoard> {
                   ' Add',
                   style: GoogleFonts.poppins(
                       color: AppConfig.colors.themeColor,
-                      fontSize: 14,
+                      fontSize: Get.width * 0.038,
                       fontWeight: FontWeight.bold),
                 ),
                 activeColor: AppConfig.colors.themeColor,
@@ -169,7 +170,7 @@ class _DashBoardState extends State<DashBoard> {
                   'Chat',
                   style: GoogleFonts.poppins(
                       color: AppConfig.colors.themeColor,
-                      fontSize: 14,
+                      fontSize: Get.width * 0.038,
                       fontWeight: FontWeight.bold),
                 ),
                 activeColor: AppConfig.colors.themeColor,
@@ -183,7 +184,7 @@ class _DashBoardState extends State<DashBoard> {
                   ' Profile',
                   style: GoogleFonts.poppins(
                       color: AppConfig.colors.themeColor,
-                      fontSize: 14,
+                      fontSize: Get.width * 0.038,
                       fontWeight: FontWeight.bold),
                 ),
                 activeColor: AppConfig.colors.themeColor,

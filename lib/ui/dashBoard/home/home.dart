@@ -159,74 +159,79 @@ class _HomeState extends State<Home> {
         Expanded(
           flex: 7,
           child: SizedBox(
-            height: 50,
-            child: TextFormField(
-              textAlignVertical: TextAlignVertical.center,
-              style: GoogleFonts.poppins(
-                fontSize: 13,
-                fontWeight: FontWeight.bold,
-                color: AppConfig.colors.whiteColor,
-              ),
-              readOnly: false,
-              controller: locationSearchController,
-              onChanged: (val) {
-                setState(() {});
-              },
-              decoration: InputDecoration(
-                isDense: true,
-                hintText: "Search Ads",
-                suffixIcon: locationSearchController.text.isNotEmpty
-                    ? GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            locationSearchController.clear();
-                          });
-                        },
-                        child: Container(
+            height: Get.height * 0.065,
+            child: Center(
+              child: TextFormField(
+                textAlignVertical: TextAlignVertical.center,
+                style: GoogleFonts.poppins(
+                  fontSize: Get.height * 0.02,
+                  fontWeight: FontWeight.bold,
+                  color: AppConfig.colors.whiteColor,
+                ),
+                readOnly: false,
+                controller: locationSearchController,
+                onChanged: (val) {
+                  setState(() {});
+                },
+                decoration: InputDecoration(
+                  isDense: true,
+                  hintText: "Search Ads",
+                  suffixIcon: locationSearchController.text.isNotEmpty
+                      ? GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              locationSearchController.clear();
+                            });
+                          },
+                          child: Container(
+                            margin: EdgeInsets.symmetric(vertical: 10),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  width: Get.height * 0.002,
+                                  color: AppConfig.colors.whiteColor),
+                            ),
+                            child: Icon(
+                              Icons.clear,
+                              color: AppConfig.colors.whiteColor,
+                              size: Get.height * 0.015,
+                            ),
+                          ),
+                        )
+                      : Container(
                           margin: EdgeInsets.symmetric(vertical: 10),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                                width: 0.8, color: AppConfig.colors.whiteColor),
-                          ),
-                          child: Icon(
-                            Icons.clear,
-                            color: AppConfig.colors.whiteColor,
-                            size: 15,
-                          ),
-                        ),
-                      )
-                    : Container(
-                        margin: EdgeInsets.symmetric(vertical: 10),
-                        child: Image.asset(
-                          AppConfig.images.searchIcon,
-                          scale: 4,
-                        )),
-                fillColor: AppConfig.colors.themeColor,
-                filled: true,
-                hintStyle: GoogleFonts.poppins(
-                    fontSize: Get.width * 0.05,
-                    color: AppConfig.colors.whiteColor,
-                    fontWeight: FontWeight.bold),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  borderSide: BorderSide(color: Color(0xffEEF9FF)),
-                ),
-                disabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  borderSide: BorderSide(color: Color(0xffEEF9FF)),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  borderSide: BorderSide(color: Color(0xffEEF9FF)),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  borderSide: BorderSide(color: Color(0xffEEF9FF)),
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  borderSide: BorderSide(color: Color(0xffEEF9FF)),
+                          child: Image.asset(
+                            AppConfig.images.searchIcon,
+                            scale: Get.height * 0.007,
+                          )),
+                  contentPadding: EdgeInsets.only(
+                      top: Get.height * 0.01, left: Get.width * 0.015),
+                  fillColor: AppConfig.colors.themeColor,
+                  filled: true,
+                  hintStyle: GoogleFonts.poppins(
+                      fontSize: Get.width * 0.05,
+                      color: AppConfig.colors.whiteColor,
+                      fontWeight: FontWeight.bold),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    borderSide: BorderSide(color: Color(0xffEEF9FF)),
+                  ),
+                  disabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    borderSide: BorderSide(color: Color(0xffEEF9FF)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    borderSide: BorderSide(color: Color(0xffEEF9FF)),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    borderSide: BorderSide(color: Color(0xffEEF9FF)),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    borderSide: BorderSide(color: Color(0xffEEF9FF)),
+                  ),
                 ),
               ),
             ),
@@ -241,7 +246,8 @@ class _HomeState extends State<Home> {
             },
             child: Padding(
               padding: EdgeInsets.all(Get.width * 0.01),
-              child: Image.asset(AppConfig.images.filter, scale: 4),
+              child: Image.asset(AppConfig.images.filter,
+                  scale: Get.height * 0.006),
             ),
           ),
         ),
@@ -471,7 +477,7 @@ class _BottomSheetRefineState extends State<BottomSheetRefine> {
             Text(
               '$heading',
               style: GoogleFonts.roboto(
-                fontSize: 17.0,
+                fontSize: Get.width * 0.04,
                 color: AppConfig.colors.textColor2,
                 height: 1.06,
               ),
@@ -480,13 +486,14 @@ class _BottomSheetRefineState extends State<BottomSheetRefine> {
             Text(
               '$subHeading',
               style: GoogleFonts.roboto(
-                fontSize: 17.0,
+                fontSize: Get.width * 0.04,
                 color: Colors.black,
                 height: 1.06,
               ),
             ),
             SizedBox(width: 10),
-            Image.asset(AppConfig.images.dropDownIcon, scale: 3),
+            Image.asset(AppConfig.images.dropDownIcon,
+                scale: Get.width * 0.012),
           ],
         ),
       ),
@@ -513,7 +520,7 @@ class _BottomSheetRefineState extends State<BottomSheetRefine> {
           Text(
             '$heading',
             style: GoogleFonts.roboto(
-              fontSize: 17.0,
+              fontSize: Get.width * 0.04,
               color: AppConfig.colors.textColor2,
               height: 1.06,
             ),
@@ -554,13 +561,13 @@ class _BottomSheetRefineState extends State<BottomSheetRefine> {
           Text(
             '$subHeading',
             style: GoogleFonts.roboto(
-              fontSize: 17.0,
+              fontSize: Get.width * 0.04,
               color: Colors.black,
               height: 1.06,
             ),
           ),
           SizedBox(width: 10),
-          Image.asset(AppConfig.images.dropDownIcon, scale: 3),
+          Image.asset(AppConfig.images.dropDownIcon, scale: Get.width * 0.012),
         ],
       ),
     );
