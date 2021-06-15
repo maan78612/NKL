@@ -17,13 +17,13 @@ class CategoryWidget extends StatelessWidget {
         children: [
           Image.asset(
             category.icon,
-            scale: Get.width * 0.013,
+            height: Get.width * 0.14,
           ),
           SizedBox(height: 10),
           Text(
             '${category.title}',
             style: GoogleFonts.roboto(
-              fontSize: 12.0,
+              fontSize: Get.width * 0.02,
               color: const Color(0xFF1D2226).withOpacity(0.8),
             ),
           ),

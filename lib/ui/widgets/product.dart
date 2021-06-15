@@ -52,14 +52,14 @@ class Product extends StatelessWidget {
                         "${ad.itemName ?? ""}",
                         style: GoogleFonts.poppins(
                             color: AppConfig.colors.blackColor,
-                            fontSize: 15,
+                            fontSize: Get.height * 0.02,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
                     Text(
                       '5 minutes ago',
                       style: GoogleFonts.roboto(
-                        fontSize: 10.0,
+                        fontSize: Get.height * 0.014,
                         color: const Color(0xFF070707).withOpacity(0.5),
                         height: 1.1,
                       ),
@@ -70,7 +70,8 @@ class Product extends StatelessWidget {
                       child: Text(
                         "\$ ${ad.price}",
                         style: GoogleFonts.poppins(
-                            color: AppConfig.colors.themeColor, fontSize: 12),
+                            color: AppConfig.colors.themeColor,
+                            fontSize: Get.height * 0.014),
                       ),
                     ),
                     Row(
@@ -88,7 +89,7 @@ class Product extends StatelessWidget {
                               "Karachi",
                               style: GoogleFonts.poppins(
                                   color: AppConfig.colors.blackGrey,
-                                  fontSize: 10,
+                                  fontSize: Get.height * 0.012,
                                   fontWeight: FontWeight.bold),
                             ),
                           ],
@@ -104,8 +105,8 @@ class Product extends StatelessWidget {
                                 opacity: .35,
                                 child: Container(
                                   margin: EdgeInsets.all(5),
-                                  height: 25,
-                                  width: 25,
+                                  height: 32,
+                                  width: 32,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: AppConfig.colors.blackColor
@@ -113,11 +114,14 @@ class Product extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Image.asset(
-                                index == 1
-                                    ? AppConfig.images.favoriteFillIcon
-                                    : AppConfig.images.favoriteIcon,
-                                scale: 3,
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Image.asset(
+                                  index == 1
+                                      ? AppConfig.images.favoriteFillIcon
+                                      : AppConfig.images.favoriteIcon,
+                                  height: Get.height * 0.016,
+                                ),
                               ),
                             ],
                           ),

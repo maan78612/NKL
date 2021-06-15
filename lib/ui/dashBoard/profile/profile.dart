@@ -140,7 +140,7 @@ class Profile extends StatelessWidget {
       child: ListTile(
         onTap: () => onTapped(index),
         leading: Container(
-          height: Get.width * 0.11,
+          // height: Get.width * 0.11,
           width: Get.width * 0.11,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),

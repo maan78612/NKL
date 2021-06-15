@@ -164,7 +164,7 @@ class _HomeState extends State<Home> {
               child: TextFormField(
                 textAlignVertical: TextAlignVertical.center,
                 style: GoogleFonts.poppins(
-                  fontSize: Get.height * 0.02,
+                  fontSize: Get.height * 0.016,
                   fontWeight: FontWeight.bold,
                   color: AppConfig.colors.whiteColor,
                 ),
@@ -202,14 +202,14 @@ class _HomeState extends State<Home> {
                           margin: EdgeInsets.symmetric(vertical: 10),
                           child: Image.asset(
                             AppConfig.images.searchIcon,
-                            scale: Get.height * 0.007,
+                            height: Get.height * 0.007,
                           )),
                   contentPadding: EdgeInsets.only(
                       top: Get.height * 0.01, left: Get.width * 0.015),
                   fillColor: AppConfig.colors.themeColor,
                   filled: true,
                   hintStyle: GoogleFonts.poppins(
-                      fontSize: Get.width * 0.05,
+                      fontSize: Get.height * 0.04,
                       color: AppConfig.colors.whiteColor,
                       fontWeight: FontWeight.bold),
                   enabledBorder: OutlineInputBorder(
@@ -246,8 +246,10 @@ class _HomeState extends State<Home> {
             },
             child: Padding(
               padding: EdgeInsets.all(Get.width * 0.01),
-              child: Image.asset(AppConfig.images.filter,
-                  scale: Get.height * 0.006),
+              child: Image.asset(
+                AppConfig.images.filter,
+                height: Get.height * 0.054,
+              ),
             ),
           ),
         ),

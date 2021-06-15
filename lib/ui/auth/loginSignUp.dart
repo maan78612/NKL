@@ -90,324 +90,303 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
       builder: (context, appProvider, child) {
         return Scaffold(
           backgroundColor: AppConfig.colors.whiteColor,
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(240),
-            child: Container(
-              padding: EdgeInsets.only(top: Get.height * 0.02),
-              margin: EdgeInsets.symmetric(
-                  horizontal: Get.width * 0.03, vertical: Get.height * 0.02),
-              child: Container(
-                width: Get.width,
-                height: Get.height,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      height: Get.height * 0.17,
-                      child: Image.asset(AppConfig.images.logo),
-                    ),
-                    Text(
-                      'Welcome',
-                      style: GoogleFonts.poppins(
-                        fontSize: Get.height * 0.055,
-                        color: AppConfig.colors.themeColor,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          body: SingleChildScrollView(
-            child: Container(
-              height: Get.height * 0.8,
-              width: Get.width,
-              margin: EdgeInsets.symmetric(
-                  vertical: Get.height * 0.01, horizontal: Get.width * 0.02),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        margin: EdgeInsets.only(left: 80, right: 80),
-                        width: Get.width * 0.7,
-                        decoration: BoxDecoration(
-                            //This is for background color
-                            color: Colors.white.withOpacity(0.0),
-                            //This is for bottom border that is needed
-                            border: Border(
-                                bottom: BorderSide(
-                                    color: AppConfig.colors.whiteColor,
-                                    width: 1))),
-                        child: TabBar(
-                          physics: NeverScrollableScrollPhysics(),
-                          isScrollable: false,
-                          labelStyle: GoogleFonts.poppins(
-                              fontSize: Get.height * 0.022,
-                              fontWeight: FontWeight.w700),
-                          labelColor: AppConfig.colors.themeColor,
-                          unselectedLabelColor: AppConfig.colors.blackColor,
-                          unselectedLabelStyle: GoogleFonts.poppins(
-                              fontSize: Get.height * 0.02,
-                              fontWeight: FontWeight.w500),
-                          controller: _controller,
-                          tabs: [
-                            Tab(text: 'LOG IN'),
-                            Tab(text: 'SIGN UP'),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                    // create widgets for each tab bar here
-                    Expanded(
-                      flex: 8,
-                      child: TabBarView(
-                        physics: NeverScrollableScrollPhysics(),
-                        controller: _controller,
+          body: Container(
+            margin: EdgeInsets.symmetric(
+                vertical: Get.height * 0.01, horizontal: Get.width * 0.02),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(top: Get.height * 0.02),
+                    margin: EdgeInsets.symmetric(
+                        horizontal: Get.width * 0.03,
+                        vertical: Get.height * 0.02),
+                    child: Container(
+                      width: Get.width,
+                      // height: Get.height,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          // first tab bar view widget
-                          Container(
+                          SizedBox(
+                            height: Get.height * 0.16,
+                            child: Image.asset(AppConfig.images.logo),
+                          ),
+                          Text(
+                            'Welcome',
+                            style: GoogleFonts.poppins(
+                              fontSize: Get.height * 0.055,
+                              color: AppConfig.colors.themeColor,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 80, right: 80),
+                    width: Get.width * 0.7,
+                    decoration: BoxDecoration(
+                        //This is for background color
+                        color: Colors.white.withOpacity(0.0),
+                        //This is for bottom border that is needed
+                        border: Border(
+                            bottom: BorderSide(
+                                color: AppConfig.colors.whiteColor, width: 1))),
+                    child: TabBar(
+                      physics: NeverScrollableScrollPhysics(),
+                      isScrollable: false,
+                      labelStyle: GoogleFonts.poppins(
+                          fontSize: Get.height * 0.022,
+                          fontWeight: FontWeight.w700),
+                      labelColor: AppConfig.colors.themeColor,
+                      unselectedLabelColor: AppConfig.colors.blackColor,
+                      unselectedLabelStyle: GoogleFonts.poppins(
+                          fontSize: Get.height * 0.02,
+                          fontWeight: FontWeight.w500),
+                      controller: _controller,
+                      tabs: [
+                        Tab(text: 'LOG IN'),
+                        Tab(text: 'SIGN UP'),
+                      ],
+                    ),
+                  ),
+
+                  // create widgets for each tab bar here
+                  Container(
+                    height: Get.height * 0.6,
+                    child: TabBarView(
+                      physics: NeverScrollableScrollPhysics(),
+                      controller: _controller,
+                      children: [
+                        SingleChildScrollView(
+                          child: Container(
                             padding: EdgeInsets.symmetric(horizontal: 20),
                             child: Form(
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
                               key: _formKey,
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      height: Get.height * 0.02,
-                                    ),
-                                    Text(
-                                      'Email',
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: Get.height * 0.02,
+                                  ),
+                                  Text(
+                                    'Email',
+                                    style: GoogleFonts.poppins(
+                                        color: AppConfig.colors.blackGrey,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 6.0),
+                                    child: TextFormField(
+                                      controller: loginEmailController,
+                                      focusNode: loginEmailFocusNode,
+                                      textInputAction: TextInputAction.next,
+                                      validator: FieldValidator.validateEmail,
                                       style: GoogleFonts.poppins(
-                                          color: AppConfig.colors.blackGrey,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 12),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 6.0),
-                                      child: TextFormField(
-                                        controller: loginEmailController,
-                                        focusNode: loginEmailFocusNode,
-                                        textInputAction: TextInputAction.next,
-                                        validator: FieldValidator.validateEmail,
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 14,
+                                        fontSize: 14,
+                                      ),
+                                      decoration: InputDecoration(
+                                        isDense: true,
+                                        hintText: "email",
+                                        fillColor: AppConfig.colors.whiteColor,
+                                        filled: true,
+                                        hintStyle: TextStyle(
+                                            fontSize: 12,
+                                            color: AppConfig.colors.hintColor),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          borderSide: BorderSide(
+                                              color: AppConfig
+                                                  .colors.fieldBorderColor),
                                         ),
-                                        decoration: InputDecoration(
-                                          isDense: true,
-                                          hintText: "email",
-                                          fillColor:
-                                              AppConfig.colors.whiteColor,
-                                          filled: true,
-                                          hintStyle: TextStyle(
-                                              fontSize: 12,
+                                        disabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          borderSide: BorderSide(
+                                              color: AppConfig
+                                                  .colors.fieldBorderColor),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          borderSide: BorderSide(
+                                              color: AppConfig
+                                                  .colors.enableBorderColor),
+                                        ),
+                                        errorBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          borderSide: BorderSide(
+                                              color: AppConfig
+                                                  .colors.fieldBorderColor),
+                                        ),
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          borderSide: BorderSide(
+                                              color: AppConfig
+                                                  .colors.fieldBorderColor),
+                                        ),
+                                      ),
+                                      onEditingComplete: () {
+                                        setState(() {
+                                          loginEmailFocusNode.unfocus();
+                                        });
+                                      },
+                                      onFieldSubmitted: (val) {
+                                        setState(() {
+                                          FocusScope.of(Get.context)
+                                              .requestFocus(loginPassFocusNode);
+                                        });
+                                      },
+                                      keyboardType: TextInputType.emailAddress,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Password',
+                                    style: GoogleFonts.poppins(
+                                        color: AppConfig.colors.blackGrey,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 6.0),
+                                    child: TextFormField(
+                                      controller: loginPassController,
+                                      focusNode: loginPassFocusNode,
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'password required';
+                                        }
+                                        return null;
+                                      },
+                                      obscureText: isShowPass,
+                                      style: GoogleFonts.poppins(fontSize: 14),
+                                      decoration: InputDecoration(
+                                        isDense: true,
+                                        hintText: "password",
+                                        suffixIcon: GestureDetector(
+                                          onTap: () {
+                                            showPass();
+                                          },
+                                          child: Image.asset(
+                                            !isEyeOpen
+                                                ? AppConfig.images.eyeOpen
+                                                : AppConfig.images.eyeClose,
+                                            scale: 20,
+                                            color: Color(0xffd1d4d8),
+                                          ),
+                                        ),
+                                        fillColor: AppConfig.colors.whiteColor,
+                                        filled: true,
+                                        hintStyle: TextStyle(
+                                            fontSize: 12,
+                                            color: AppConfig.colors.hintColor),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          borderSide: BorderSide(
+                                              color: AppConfig
+                                                  .colors.fieldBorderColor),
+                                        ),
+                                        disabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          borderSide: BorderSide(
+                                              color: AppConfig
+                                                  .colors.fieldBorderColor),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          borderSide: BorderSide(
+                                              color: AppConfig
+                                                  .colors.enableBorderColor),
+                                        ),
+                                        errorBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          borderSide: BorderSide(
+                                              color: AppConfig
+                                                  .colors.fieldBorderColor),
+                                        ),
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          borderSide: BorderSide(
+                                              color: AppConfig
+                                                  .colors.fieldBorderColor),
+                                        ),
+                                      ),
+                                      keyboardType: TextInputType.emailAddress,
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: TextButton(
+                                      child: Text('forgot password',
+                                          style: GoogleFonts.poppins(
                                               color:
-                                                  AppConfig.colors.hintColor),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)),
-                                            borderSide: BorderSide(
-                                                color: AppConfig
-                                                    .colors.fieldBorderColor),
-                                          ),
-                                          disabledBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)),
-                                            borderSide: BorderSide(
-                                                color: AppConfig
-                                                    .colors.fieldBorderColor),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)),
-                                            borderSide: BorderSide(
-                                                color: AppConfig
-                                                    .colors.enableBorderColor),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)),
-                                            borderSide: BorderSide(
-                                                color: AppConfig
-                                                    .colors.fieldBorderColor),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)),
-                                            borderSide: BorderSide(
-                                                color: AppConfig
-                                                    .colors.fieldBorderColor),
-                                          ),
-                                        ),
-                                        onEditingComplete: () {
-                                          setState(() {
-                                            loginEmailFocusNode.unfocus();
-                                          });
-                                        },
-                                        onFieldSubmitted: (val) {
-                                          setState(() {
-                                            FocusScope.of(Get.context)
-                                                .requestFocus(
-                                                    loginPassFocusNode);
-                                          });
-                                        },
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                      ),
+                                                  AppConfig.colors.themeColor,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 13)),
+                                      onPressed: () {
+                                        Get.bottomSheet(ForgotPasswordDialog());
+                                      },
                                     ),
-                                    Text(
-                                      'Password',
-                                      style: GoogleFonts.poppins(
-                                          color: AppConfig.colors.blackGrey,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 12),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 6.0),
-                                      child: TextFormField(
-                                        controller: loginPassController,
-                                        focusNode: loginPassFocusNode,
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return 'password required';
-                                          }
-                                          return null;
-                                        },
-                                        obscureText: isShowPass,
-                                        style:
-                                            GoogleFonts.poppins(fontSize: 14),
-                                        decoration: InputDecoration(
-                                          isDense: true,
-                                          hintText: "password",
-                                          suffixIcon: GestureDetector(
-                                            onTap: () {
-                                              showPass();
-                                            },
-                                            child: Image.asset(
-                                              !isEyeOpen
-                                                  ? AppConfig.images.eyeOpen
-                                                  : AppConfig.images.eyeClose,
-                                              scale: 20,
-                                              color: Color(0xffd1d4d8),
-                                            ),
-                                          ),
-                                          fillColor:
-                                              AppConfig.colors.whiteColor,
-                                          filled: true,
-                                          hintStyle: TextStyle(
-                                              fontSize: 12,
+                                  ),
+                                  SizedBox(
+                                    height: Get.height * 0.03,
+                                  ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 20, right: 20),
+                                    child: MaterialButton(
+                                      elevation: 3,
+                                      onPressed: () async {
+                                        if (!_formKey.currentState.validate()) {
+                                          return;
+                                        }
+                                        Get.to(DashBoard());
+                                      },
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      color: AppConfig.colors.themeColor,
+                                      height: Get.height * .065,
+                                      child: Center(
+                                        child: Text(
+                                          'LOG IN',
+                                          style: GoogleFonts.poppins(
+                                              fontSize: Get.height * 0.035,
+                                              fontWeight: FontWeight.w600,
                                               color:
-                                                  AppConfig.colors.hintColor),
-                                          enabledBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)),
-                                            borderSide: BorderSide(
-                                                color: AppConfig
-                                                    .colors.fieldBorderColor),
-                                          ),
-                                          disabledBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)),
-                                            borderSide: BorderSide(
-                                                color: AppConfig
-                                                    .colors.fieldBorderColor),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)),
-                                            borderSide: BorderSide(
-                                                color: AppConfig
-                                                    .colors.enableBorderColor),
-                                          ),
-                                          errorBorder: OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)),
-                                            borderSide: BorderSide(
-                                                color: AppConfig
-                                                    .colors.fieldBorderColor),
-                                          ),
-                                          focusedErrorBorder:
-                                              OutlineInputBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(10)),
-                                            borderSide: BorderSide(
-                                                color: AppConfig
-                                                    .colors.fieldBorderColor),
-                                          ),
-                                        ),
-                                        keyboardType:
-                                            TextInputType.emailAddress,
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: Alignment.centerRight,
-                                      child: TextButton(
-                                        child: Text('forgot password',
-                                            style: GoogleFonts.poppins(
-                                                color:
-                                                    AppConfig.colors.themeColor,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 13)),
-                                        onPressed: () {
-                                          Get.bottomSheet(
-                                              ForgotPasswordDialog());
-                                        },
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: Get.height * 0.03,
-                                    ),
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.only(left: 20, right: 20),
-                                      child: MaterialButton(
-                                        elevation: 3,
-                                        onPressed: () async {
-                                          if (!_formKey.currentState
-                                              .validate()) {
-                                            return;
-                                          }
-                                          Get.to(DashBoard());
-                                        },
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        color: AppConfig.colors.themeColor,
-                                        height: Get.height * .065,
-                                        child: Center(
-                                          child: Text(
-                                            'LOG IN',
-                                            style: GoogleFonts.poppins(
-                                                fontSize: Get.height * 0.035,
-                                                fontWeight: FontWeight.w600,
-                                                color: AppConfig
-                                                    .colors.whiteColor),
-                                          ),
+                                                  AppConfig.colors.whiteColor),
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: Get.height * 0.05,
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                  SizedBox(
+                                    height: Get.height * 0.05,
+                                  ),
+                                ],
                               ),
                             ),
                           ),
+                        ),
 
-                          // second tab bar view widget
-                          Container(
+                        // second tab bar view widget
+                        SingleChildScrollView(
+                          child: Container(
                             padding: EdgeInsets.symmetric(horizontal: 20),
                             child: Form(
                               autovalidateMode:
@@ -419,496 +398,437 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                                   SizedBox(
                                     height: Get.height * 0.02,
                                   ),
-                                  Expanded(
-                                    child: SingleChildScrollView(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Full name',
-                                            style: GoogleFonts.poppins(
-                                                color:
-                                                    AppConfig.colors.blackGrey,
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 12),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 6.0),
-                                            child: TextFormField(
-                                              controller: fullNameController,
-                                              focusNode: fullNameFocusNode,
-                                              textInputAction:
-                                                  TextInputAction.next,
-                                              validator: (value) {
-                                                if (value == null ||
-                                                    value.isEmpty) {
-                                                  return 'name required';
-                                                }
-                                                return null;
-                                              },
-                                              style: GoogleFonts.poppins(
-                                                  fontSize: 14),
-                                              decoration: InputDecoration(
-                                                isDense: true,
-                                                hintText: "name",
-                                                fillColor:
-                                                    AppConfig.colors.whiteColor,
-                                                filled: true,
-                                                hintStyle: TextStyle(
-                                                    fontSize: 12,
-                                                    color: AppConfig
-                                                        .colors.hintColor),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                                disabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .enableBorderColor),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Text(
-                                            'Email',
-                                            style: GoogleFonts.poppins(
-                                                color:
-                                                    AppConfig.colors.blackGrey,
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 12),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 6.0),
-                                            child: TextFormField(
-                                              controller: emailController,
-                                              focusNode: emailFocusNode,
-                                              textInputAction:
-                                                  TextInputAction.next,
-                                              validator:
-                                                  FieldValidator.validateEmail,
-                                              style: GoogleFonts.poppins(
-                                                  fontSize: 14),
-                                              decoration: InputDecoration(
-                                                isDense: true,
-                                                hintText: "name",
-                                                fillColor:
-                                                    AppConfig.colors.whiteColor,
-                                                filled: true,
-                                                hintStyle: TextStyle(
-                                                    fontSize: 12,
-                                                    color: AppConfig
-                                                        .colors.hintColor),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                                disabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .enableBorderColor),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                              ),
-                                              keyboardType:
-                                                  TextInputType.emailAddress,
-                                            ),
-                                          ),
-                                          Text(
-                                            'Contact Number',
-                                            style: GoogleFonts.poppins(
-                                                color:
-                                                    AppConfig.colors.blackGrey,
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 12),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 6.0),
-                                            child: TextFormField(
-                                              controller: numberController,
-                                              focusNode: numberFocusNode,
-                                              textInputAction:
-                                                  TextInputAction.next,
-                                              validator: (value) {
-                                                if (value == null ||
-                                                    value.isEmpty) {
-                                                  return 'contact number required';
-                                                }
-                                                return null;
-                                              },
-                                              style: GoogleFonts.poppins(
-                                                  fontSize: 14),
-                                              decoration: InputDecoration(
-                                                isDense: true,
-                                                hintText: "contact number",
-                                                fillColor:
-                                                    AppConfig.colors.whiteColor,
-                                                filled: true,
-                                                hintStyle: TextStyle(
-                                                    fontSize: 12,
-                                                    color: AppConfig
-                                                        .colors.hintColor),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                                disabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .enableBorderColor),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                              ),
-                                              keyboardType:
-                                                  TextInputType.number,
-                                            ),
-                                          ),
-                                          Text(
-                                            'Password',
-                                            style: GoogleFonts.poppins(
-                                                color:
-                                                    AppConfig.colors.blackGrey,
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 12),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 6.0),
-                                            child: TextFormField(
-                                              controller: passwordController,
-                                              focusNode: passwordFocusNode,
-                                              textInputAction:
-                                                  TextInputAction.next,
-                                              validator: (value) {
-                                                if (value == null ||
-                                                    value.isEmpty) {
-                                                  return 'password required';
-                                                }
-                                                return null;
-                                              },
-                                              obscureText: isShowPass,
-                                              style: GoogleFonts.poppins(
-                                                  fontSize: 14),
-                                              decoration: InputDecoration(
-                                                isDense: true,
-                                                hintText: "name",
-                                                fillColor:
-                                                    AppConfig.colors.whiteColor,
-                                                filled: true,
-                                                hintStyle: TextStyle(
-                                                    fontSize: 12,
-                                                    color: AppConfig
-                                                        .colors.hintColor),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                                disabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .enableBorderColor),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                              ),
-                                              keyboardType:
-                                                  TextInputType.emailAddress,
-                                            ),
-                                          ),
-                                          Text(
-                                            'Confirm password',
-                                            style: GoogleFonts.poppins(
-                                                color:
-                                                    AppConfig.colors.blackGrey,
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 12),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 6.0),
-                                            child: TextFormField(
-                                              controller:
-                                                  confirmPasswordController,
-                                              focusNode:
-                                                  confirmPasswordFocusNode,
-                                              validator: (value) {
-                                                if (value == null ||
-                                                    value.isEmpty) {
-                                                  return 'confirm password error';
-                                                } else if (appProvider
-                                                        .isAcceptedConfirmPWDProvider ==
-                                                    0) {
-                                                  return 'password not match';
-                                                }
-                                                return null;
-                                              },
-                                              obscureText: isShowPass1,
-                                              style: GoogleFonts.poppins(
-                                                  fontSize: 14),
-                                              decoration: InputDecoration(
-                                                isDense: true,
-                                                hintText: "Confirm Password",
-                                                fillColor:
-                                                    AppConfig.colors.whiteColor,
-                                                filled: true,
-                                                hintStyle: TextStyle(
-                                                    fontSize: 12,
-                                                    color: AppConfig
-                                                        .colors.hintColor),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                                disabledBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .enableBorderColor),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                                focusedErrorBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                  borderSide: BorderSide(
-                                                      color: AppConfig.colors
-                                                          .fieldBorderColor),
-                                                ),
-                                              ),
-                                              onFieldSubmitted: (value) {
-                                                Provider.of<AppProvider>(
-                                                        Get.context,
-                                                        listen: false)
-                                                    .matchPassProvider(
-                                                        value,
-                                                        passwordController.text,
-                                                        confirmPasswordController
-                                                            .text);
-                                              },
-                                              keyboardType:
-                                                  TextInputType.emailAddress,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: Get.height * 0.05,
-                                          ),
-                                          Align(
-                                            alignment: Alignment.center,
-                                            child: Padding(
-                                              padding: EdgeInsets.only(
-                                                  left: 20, right: 20),
-                                              child: MaterialButton(
-                                                elevation: 3,
-                                                onPressed: () {
-                                                  if (!_formKey1.currentState
-                                                      .validate()) {
-                                                    return;
-                                                  }
-                                                  Get.bottomSheet(
-                                                      SuccessfullySignUpBottom(),
-                                                      isDismissible: false,
-                                                      enableDrag: false);
-                                                },
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10)),
-                                                color:
-                                                    AppConfig.colors.themeColor,
-                                                height: Get.height * .065,
-                                                child: Center(
-                                                  child: Text(
-                                                    'SIGN UP',
-                                                    style: GoogleFonts.poppins(
-                                                        fontSize:
-                                                            Get.height * 0.035,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color: AppConfig
-                                                            .colors.whiteColor),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Full name',
+                                        style: GoogleFonts.poppins(
+                                            color: AppConfig.colors.blackGrey,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 12),
                                       ),
-                                    ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 6.0),
+                                        child: TextFormField(
+                                          controller: fullNameController,
+                                          focusNode: fullNameFocusNode,
+                                          textInputAction: TextInputAction.next,
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'name required';
+                                            }
+                                            return null;
+                                          },
+                                          style:
+                                              GoogleFonts.poppins(fontSize: 14),
+                                          decoration: InputDecoration(
+                                            isDense: true,
+                                            hintText: "name",
+                                            fillColor:
+                                                AppConfig.colors.whiteColor,
+                                            filled: true,
+                                            hintStyle: TextStyle(
+                                                fontSize: 12,
+                                                color:
+                                                    AppConfig.colors.hintColor),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                            disabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig.colors
+                                                      .enableBorderColor),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Text(
+                                        'Email',
+                                        style: GoogleFonts.poppins(
+                                            color: AppConfig.colors.blackGrey,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 12),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 6.0),
+                                        child: TextFormField(
+                                          controller: emailController,
+                                          focusNode: emailFocusNode,
+                                          textInputAction: TextInputAction.next,
+                                          validator:
+                                              FieldValidator.validateEmail,
+                                          style:
+                                              GoogleFonts.poppins(fontSize: 14),
+                                          decoration: InputDecoration(
+                                            isDense: true,
+                                            hintText: "name",
+                                            fillColor:
+                                                AppConfig.colors.whiteColor,
+                                            filled: true,
+                                            hintStyle: TextStyle(
+                                                fontSize: 12,
+                                                color:
+                                                    AppConfig.colors.hintColor),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                            disabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig.colors
+                                                      .enableBorderColor),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                          ),
+                                          keyboardType:
+                                              TextInputType.emailAddress,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Contact Number',
+                                        style: GoogleFonts.poppins(
+                                            color: AppConfig.colors.blackGrey,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 12),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 6.0),
+                                        child: TextFormField(
+                                          controller: numberController,
+                                          focusNode: numberFocusNode,
+                                          textInputAction: TextInputAction.next,
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'contact number required';
+                                            }
+                                            return null;
+                                          },
+                                          style:
+                                              GoogleFonts.poppins(fontSize: 14),
+                                          decoration: InputDecoration(
+                                            isDense: true,
+                                            hintText: "contact number",
+                                            fillColor:
+                                                AppConfig.colors.whiteColor,
+                                            filled: true,
+                                            hintStyle: TextStyle(
+                                                fontSize: 12,
+                                                color:
+                                                    AppConfig.colors.hintColor),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                            disabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig.colors
+                                                      .enableBorderColor),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                          ),
+                                          keyboardType: TextInputType.number,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Password',
+                                        style: GoogleFonts.poppins(
+                                            color: AppConfig.colors.blackGrey,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 12),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 6.0),
+                                        child: TextFormField(
+                                          controller: passwordController,
+                                          focusNode: passwordFocusNode,
+                                          textInputAction: TextInputAction.next,
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'password required';
+                                            }
+                                            return null;
+                                          },
+                                          obscureText: isShowPass,
+                                          style:
+                                              GoogleFonts.poppins(fontSize: 14),
+                                          decoration: InputDecoration(
+                                            isDense: true,
+                                            hintText: "name",
+                                            fillColor:
+                                                AppConfig.colors.whiteColor,
+                                            filled: true,
+                                            hintStyle: TextStyle(
+                                                fontSize: 12,
+                                                color:
+                                                    AppConfig.colors.hintColor),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                            disabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig.colors
+                                                      .enableBorderColor),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                          ),
+                                          keyboardType:
+                                              TextInputType.emailAddress,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Confirm password',
+                                        style: GoogleFonts.poppins(
+                                            color: AppConfig.colors.blackGrey,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 12),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 6.0),
+                                        child: TextFormField(
+                                          controller: confirmPasswordController,
+                                          focusNode: confirmPasswordFocusNode,
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'confirm password error';
+                                            } else if (appProvider
+                                                    .isAcceptedConfirmPWDProvider ==
+                                                0) {
+                                              return 'password not match';
+                                            }
+                                            return null;
+                                          },
+                                          obscureText: isShowPass1,
+                                          style:
+                                              GoogleFonts.poppins(fontSize: 14),
+                                          decoration: InputDecoration(
+                                            isDense: true,
+                                            hintText: "Confirm Password",
+                                            fillColor:
+                                                AppConfig.colors.whiteColor,
+                                            filled: true,
+                                            hintStyle: TextStyle(
+                                                fontSize: 12,
+                                                color:
+                                                    AppConfig.colors.hintColor),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                            disabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig.colors
+                                                      .enableBorderColor),
+                                            ),
+                                            errorBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                            focusedErrorBorder:
+                                                OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10)),
+                                              borderSide: BorderSide(
+                                                  color: AppConfig
+                                                      .colors.fieldBorderColor),
+                                            ),
+                                          ),
+                                          onFieldSubmitted: (value) {
+                                            Provider.of<AppProvider>(
+                                                    Get.context,
+                                                    listen: false)
+                                                .matchPassProvider(
+                                                    value,
+                                                    passwordController.text,
+                                                    confirmPasswordController
+                                                        .text);
+                                          },
+                                          keyboardType:
+                                              TextInputType.emailAddress,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: Get.height * 0.05,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.center,
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 20, right: 20),
+                                          child: MaterialButton(
+                                            elevation: 3,
+                                            onPressed: () {
+                                              if (!_formKey1.currentState
+                                                  .validate()) {
+                                                return;
+                                              }
+                                              Get.bottomSheet(
+                                                  SuccessfullySignUpBottom(),
+                                                  isDismissible: false,
+                                                  enableDrag: false);
+                                            },
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10)),
+                                            color: AppConfig.colors.themeColor,
+                                            height: Get.height * .065,
+                                            child: Center(
+                                              child: Text(
+                                                'SIGN UP',
+                                                style: GoogleFonts.poppins(
+                                                    fontSize:
+                                                        Get.height * 0.035,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: AppConfig
+                                                        .colors.whiteColor),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                    )
-                  ]),
-            ),
+                        ),
+                      ],
+                    ),
+                  )
+                ]),
           ),
         );
       },
